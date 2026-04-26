@@ -1,0 +1,51 @@
+{
+  "name": "oldloom-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
+  },
+  "dependencies": {
+    "@auth/mongodb-adapter": "^3.3.0",
+    "@hookform/resolvers": "^3.9.0",
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^2.16.3",
+    "@tanstack/react-query": "^5.51.23",
+    "@tanstack/react-query-devtools": "^5.51.23",
+    "axios": "^1.7.3",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.24",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.14",
+    "lucide-react": "^0.414.0",
+    "next": "^14.2.15",
+    "next-auth": "^5.0.0-beta.25",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.1",
+    "react-hot-toast": "^2.4.1",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.5.4",
+    "three": "^0.167.1",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^15.3.1",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.167.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.15",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.5.4"
+  }
+}
