@@ -28,7 +28,7 @@ export function MobileBottomNav() {
       justifyContent: 'space-around',
       alignItems: 'center',
       height: '60px',
-      zIndex: 100,
+      zIndex: 1000,
       paddingBottom: 'env(safe-area-inset-bottom)',
     }}>
       {navItems.map((item) => (

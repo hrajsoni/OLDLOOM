@@ -33,7 +33,7 @@ export function CartDrawer() {
         ref={overlayRef}
         onClick={handleOverlayClick}
         style={{
-          position: 'fixed', inset: 0, zIndex: 50,
+          position: 'fixed', inset: 0, zIndex: 1000,
           background: 'rgba(26,22,18,0.7)', backdropFilter: 'blur(4px)',
           display: 'none', opacity: 0,
         }}
@@ -41,7 +41,7 @@ export function CartDrawer() {
       <div
         ref={drawerRef}
         style={{
-          position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 51,
+          position: 'fixed', top: 0, right: 0, bottom: 0, zIndex: 1001,
           width: '100%', maxWidth: '440px',
           background: 'var(--dark)', borderLeft: '1px solid rgba(201,168,76,0.15)',
           transform: 'translateX(100%)', display: 'flex', flexDirection: 'column',
