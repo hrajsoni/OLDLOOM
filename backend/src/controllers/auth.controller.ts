@@ -14,9 +14,9 @@ const REFRESH_EXPIRES_IN = '7d';
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
-  path: '/api/v1/auth',
+  secure: true, // Required for sameSite: 'none'
+  sameSite: 'none' as const, // Required for cross-origin (Vercel -> Render)
+  path: '/', // Broaden path for easier cookie management
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 

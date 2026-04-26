@@ -33,14 +33,22 @@ app.use(
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
 const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:3000',
-  process.env.ADMIN_URL || 'http://localhost:3000',
-];
+  process.env.CLIENT_URL,
+  process.env.ADMIN_URL,
+  'http://localhost:3000',
+].filter(Boolean) as string[];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      
+      const isAllowed = allowedOrigins.includes(origin) || 
+                       (process.env.NODE_ENV === 'development' && origin.startsWith('http://localhost:')) ||
+                       origin.endsWith('.vercel.app'); // Allow Vercel previews
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         callback(new Error(`CORS blocked: ${origin}`));
