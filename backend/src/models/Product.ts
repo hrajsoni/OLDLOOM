@@ -88,7 +88,6 @@ const ProductSchema = new Schema<IProduct>(
 );
 
 // Indexes for search and filtering
-ProductSchema.index({ slug: 1 });
 ProductSchema.index({ category: 1 });
 ProductSchema.index({ subCategory: 1 });
 ProductSchema.index({ price: 1 });

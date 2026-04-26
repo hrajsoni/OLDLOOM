@@ -98,6 +98,15 @@ app.use('/api/v1/auth/login', authLimiter);
 app.use('/api/v1/auth/register', authLimiter);
 app.use('/api/v1/auth/forgot-password', authLimiter);
 
+// ── Root Route for Health Check ──────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.status(200).json({ status: 'ok', message: 'OLDLOOM API is running' });
+});
+
+app.head('/', (_req, res) => {
+  res.sendStatus(200);
+});
+
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/v1', healthRouter);
 app.use('/api/v1/auth', authRouter);
