@@ -1,18 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const router   = useRouter();
   const itemCount = useCartStore((s) => s.itemCount());
   const openCart  = useCartStore((s) => s.openCart);
 
   const navItems = [
     { label: 'Home',        icon: '🏠', href: '/' },
     { label: 'Collections', icon: '🧵', href: '/collections/men' },
-    { label: 'Account',     icon: '👤', href: '/account' },
   ];
 
   return (
@@ -51,6 +51,25 @@ export function MobileBottomNav() {
           </span>
         </Link>
       ))}
+      <button
+        onClick={() => router.push('/account')}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '0.2rem',
+          background: 'none',
+          border: 'none',
+          color: pathname === '/account' ? 'var(--gold)' : 'var(--cream-50)',
+          cursor: 'pointer',
+          padding: '0.5rem',
+        }}
+      >
+        <span style={{ fontSize: '1.2rem' }}>👤</span>
+        <span style={{ fontSize: '0.55rem', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Account
+        </span>
+      </button>
       <button
         onClick={openCart}
         style={{
