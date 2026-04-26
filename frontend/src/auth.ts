@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/auth/login`,
+            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/auth/login`,
             {
               method: 'POST',
               body: JSON.stringify({
@@ -61,7 +61,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account?.provider === 'google' && token.email) {
         try {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/google-role?email=${token.email}`
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/google-role?email=${token.email}`
           );
           const data = await res.json();
           token.role = data.role ?? 'customer';

@@ -97,7 +97,7 @@ export function CheckoutClient() {
   const handleApplyCoupon = async () => {
     if (!coupon) return;
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/coupons/validate`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/coupons/validate`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ export function CheckoutClient() {
 
     try {
       // 1. Create Razorpay Order on Backend
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/orders/create-razorpay-order`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/orders/create-razorpay-order`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ export function CheckoutClient() {
         order_id: data.orderId,
         handler: async function (response: any) {
           try {
-            const verifyRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/v1/orders/verify-payment`, {
+            const verifyRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/orders/verify-payment`, {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
