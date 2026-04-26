@@ -49,7 +49,16 @@ export function HomeClient() {
         <Newsletter />
 
         <footer
-          className="bg-[#3D2B1F] border-t border-[rgba(201,168,76,0.1)] py-12 px-[var(--section-px)] pb-[calc(3rem+80px)] lg:pb-12 flex flex-wrap items-center justify-between gap-4"
+          style={{
+            background: '#3D2B1F',
+            borderTop: '1px solid rgba(201,168,76,0.1)',
+            padding: '3rem var(--section-px) calc(3rem + 80px) var(--section-px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '1rem',
+          }}
         >
           <p style={{ fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(245,240,232,0.5)', letterSpacing: '0.1em' }}>
             © 2025 Old Loom. All rights reserved.
