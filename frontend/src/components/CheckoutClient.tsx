@@ -101,7 +101,7 @@ export function CheckoutClient() {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.accessToken}` 
+          'Authorization': `Bearer ${(session as any)?.accessToken}` 
         },
         body: JSON.stringify({ code: coupon, orderValue: subtotal })
       });
@@ -129,7 +129,7 @@ export function CheckoutClient() {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.accessToken}`
+          'Authorization': `Bearer ${(session as any)?.accessToken}`
         },
         body: JSON.stringify({ total: grandTotal })
       });
@@ -153,7 +153,7 @@ export function CheckoutClient() {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${session?.accessToken}`
+                'Authorization': `Bearer ${(session as any)?.accessToken}`
               },
               body: JSON.stringify({
                 razorpay_order_id: response.razorpay_order_id,
