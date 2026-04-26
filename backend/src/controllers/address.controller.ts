@@ -51,7 +51,7 @@ export async function updateAddress(req: Request, res: Response, next: NextFunct
     const user = await User.findById(req.user?._id);
     if (!user) throw new AppError('User not found', 404);
 
-    const addr = user.addresses.id(id);
+    const addr = user.addresses.find((a: any) => a._id?.toString() === id);
     if (!addr) throw new AppError('Address not found', 404);
 
     if (validated.isDefault) {
