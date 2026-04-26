@@ -2,17 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { User, UserRole } from '../models/User';
 import { logger } from '../config/logger';
-
-export interface AuthRequest extends Request {
-  user?: {
-    _id: string;
-    role: UserRole;
-    email: string;
-  };
-}
+export type AuthRequest = Request;
 
 export const protect = async (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
@@ -44,7 +37,7 @@ export const protect = async (
 };
 
 export const requireRole = (...roles: UserRole[]) => {
-  return (req: AuthRequest, res: Response, next: NextFunction): void => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     if (!req.user || !roles.includes(req.user.role)) {
       res.status(403).json({ status: 'error', message: 'Insufficient permissions' });
       return;
