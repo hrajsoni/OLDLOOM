@@ -26,5 +26,12 @@ export default async function AdminLayout({
     redirect('/?error=unauthorized');
   }
 
-  return <AdminShell user={session.user}>{children}</AdminShell>;
+  const user = {
+    ...session.user,
+    name:  session.user.name  ?? undefined,
+    email: session.user.email ?? undefined,
+    image: session.user.image ?? undefined,
+  };
+
+  return <AdminShell user={user}>{children}</AdminShell>;
 }
