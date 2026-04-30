@@ -72,6 +72,7 @@ router.patch(
 
 // ── Orders ─────────────────────────────────────────────────────────────────────
 router.get('/orders', checkPermission(Permission.MANAGE_ORDERS), orderAdminCtrl.listOrders);
+router.get('/orders/export/csv', checkPermission(Permission.MANAGE_ORDERS), orderAdminCtrl.exportCSV);
 router.get('/orders/:id', checkPermission(Permission.MANAGE_ORDERS), orderAdminCtrl.getOrder);
 router.patch(
   '/orders/:id/status',
@@ -85,17 +86,16 @@ router.post(
   auditLog('PROCESS_REFUND', 'order'),
   orderAdminCtrl.processRefund
 );
-router.get('/orders/export/csv', checkPermission(Permission.MANAGE_ORDERS), orderAdminCtrl.exportCSV);
 
 // ── Inventory ──────────────────────────────────────────────────────────────────
 router.get('/inventory', checkPermission(Permission.MANAGE_INVENTORY), inventoryCtrl.getInventory);
+router.get('/inventory/low-stock', checkPermission(Permission.MANAGE_INVENTORY), inventoryCtrl.getLowStock);
 router.patch(
   '/inventory/:productId/variant/:sku',
   checkPermission(Permission.MANAGE_INVENTORY),
   auditLog('UPDATE_INVENTORY', 'product'),
   inventoryCtrl.updateVariantStock
 );
-router.get('/inventory/low-stock', checkPermission(Permission.MANAGE_INVENTORY), inventoryCtrl.getLowStock);
 
 // ── Staff (super_admin only) ───────────────────────────────────────────────────
 router.get('/staff', requireRole('super_admin'), staffCtrl.listStaff);

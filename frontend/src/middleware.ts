@@ -1,16 +1,43 @@
 import { auth } from '@/auth';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
 const ADMIN_ROLES = ['super_admin', 'manager', 'content_editor', 'support_staff'];
 
 export default auth((req) => {
-  const { nextUrl, auth: session } = req as any;
+  const { nextUrl } = req;
+  const session = req.auth;
   const pathname = nextUrl.pathname;
   const isLoggedIn = !!session;
   const userRole = session?.user?.role;
+  const isAdmin = userRole && ADMIN_ROLES.includes(userRole);
 
-  // ── Protected customer routes ──────────────────────────────────────────────
+  // Admin login page — redirect away if already logged in as admin
+  if (pathname === '/admin/login') {
+    if (isLoggedIn && isAdmin) {
+      return NextResponse.redirect(new URL('/admin', req.url));
+    }
+    if (isLoggedIn && !isAdmin) {
+      return NextResponse.redirect(new URL('/?error=unauthorized', req.url));
+    }
+    return NextResponse.next();
+  }
+
+  // Admin accept-invite — always allow (public token-based page)
+  if (pathname === '/admin/accept-invite') {
+    return NextResponse.next();
+  }
+
+  // All other admin routes
+  if (pathname.startsWith('/admin')) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL('/admin/login', req.url));
+    }
+    if (!isAdmin) {
+      return NextResponse.redirect(new URL('/?error=unauthorized', req.url));
+    }
+  }
+
+  // Customer protected routes
   const customerRoutes = ['/account', '/checkout', '/order-success'];
   if (customerRoutes.some((r) => pathname.startsWith(r))) {
     if (!isLoggedIn) {
@@ -18,21 +45,10 @@ export default auth((req) => {
     }
   }
 
-  // ── Admin routes ───────────────────────────────────────────────────────────
-  if (pathname.startsWith('/admin')) {
-    if (!isLoggedIn) {
-      return NextResponse.redirect(new URL('/login?callbackUrl=/admin', req.url));
-    }
-    if (!ADMIN_ROLES.includes(userRole)) {
-      return NextResponse.redirect(new URL('/?error=unauthorized', req.url));
-    }
-  }
-
-  // ── Redirect logged-in users away from auth pages ─────────────────────────
+  // Auth pages — redirect logged-in users away
   const authRoutes = ['/login', '/register'];
   if (authRoutes.includes(pathname) && isLoggedIn) {
-    const role = userRole;
-    if (ADMIN_ROLES.includes(role)) {
+    if (isAdmin) {
       return NextResponse.redirect(new URL('/admin', req.url));
     }
     return NextResponse.redirect(new URL('/account', req.url));

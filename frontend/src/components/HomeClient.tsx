@@ -5,11 +5,16 @@ import dynamic from 'next/dynamic';
 import { MarqueeSection }     from '@/components/sections/MarqueeSection';
 import { CollectionsSection } from '@/components/sections/CollectionsSection';
 import { CraftSection }       from '@/components/sections/CraftSection';
+import { FeaturedSection }    from '@/components/sections/FeaturedSection';
+import { TrustSection }       from '@/components/sections/TrustSection';
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { Navbar }             from '@/components/ui/Navbar';
+import { AnnouncementBar }    from '@/components/ui/AnnouncementBar';
 import { Newsletter }         from '@/components/ui/Newsletter';
+import { Footer }             from '@/components/ui/Footer';
+import { CartDrawer }         from '@/components/ui/CartDrawer';
 
-// No ssr: false needed here if we use mounted check
-const HeroSection  = dynamic(
+const HeroSection = dynamic(
   () => import('@/components/sections/HeroSection').then((m) => ({ default: m.HeroSection })),
   { ssr: false }
 );
@@ -39,35 +44,22 @@ export function HomeClient() {
   return (
     <>
       <CustomCursor />
+      <AnnouncementBar />
       <Navbar />
 
       <main id="main-content">
         <HeroSection />
         <MarqueeSection />
         <CollectionsSection />
+        <FeaturedSection />
         <CraftSection />
+        <TrustSection />
+        <TestimonialsSection />
         <Newsletter />
-
-        <footer
-          style={{
-            background: '#3D2B1F',
-            borderTop: '1px solid rgba(201,168,76,0.1)',
-            padding: '3rem var(--section-px) calc(3rem + 80px) var(--section-px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}
-        >
-          <p style={{ fontFamily: 'monospace', fontSize: '0.65rem', color: 'rgba(245,240,232,0.5)', letterSpacing: '0.1em' }}>
-            © 2025 Old Loom. All rights reserved.
-          </p>
-          <p style={{ fontFamily: 'Georgia, serif', fontSize: '0.9rem', fontStyle: 'italic', color: '#C9A84C' }}>
-            Crafted with love in India by Harshit Raj 🇮🇳
-          </p>
-        </footer>
       </main>
+
+      <Footer />
+      <CartDrawer />
     </>
   );
 }

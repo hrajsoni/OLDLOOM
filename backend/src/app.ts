@@ -18,8 +18,9 @@ import couponRouter from './routes/coupon.route';
 import authRouter from './routes/auth.route';
 import adminRouter from './routes/admin.route';
 import wishlistRouter from './routes/wishlist.route';
-import addressRouter from './routes/address.route';
+
 import contentRouter from './routes/content.route';
+import userRouter from './routes/user.route';
 
 const app = express();
 
@@ -115,8 +116,9 @@ app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
-app.use('/api/v1/user/addresses', addressRouter);
+
 app.use('/api/v1/content', contentRouter);
+app.use('/api/v1/user', userRouter);
 
 // ── 404 + Global Error Handler ────────────────────────────────────────────────
 app.use(notFound);

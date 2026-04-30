@@ -1,43 +1,65 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import crypto from 'crypto';
 import { Order } from '../models/Order';
+import { logger } from '../config/logger';
 
-// POST /api/v1/orders/webhook
-export async function razorpayWebhook(req: Request, res: Response, next: NextFunction) {
-  try {
-    const secret = process.env.RAZORPAY_WEBHOOK_SECRET || 'dummy_webhook_secret';
-    const signature = req.headers['x-razorpay-signature'];
+export async function razorpayWebhook(req: Request, res: Response): Promise<void> {
+  const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET || '';
+  const signature = req.headers['x-razorpay-signature'] as string;
 
-    if (!signature) {
-      res.status(400).send('Missing signature');
-      return;
-    }
+  // Raw body is captured by express.raw middleware mounted on this route in order.route.ts
+  const body = (req as Request & { rawBody?: Buffer }).rawBody ?? Buffer.from(JSON.stringify(req.body));
 
-    const expectedSignature = crypto
-      .createHmac('sha256', secret)
-      .update(JSON.stringify(req.body))
-      .digest('hex');
-
-    if (expectedSignature !== signature) {
-      res.status(400).send('Invalid signature');
-      return;
-    }
-
-    const event = req.body.event;
-
-    if (event === 'payment.captured') {
-      const payment = req.body.payload.payment.entity;
-      const orderId = payment.order_id;
-      
-      // Update order status in DB
-      await Order.findOneAndUpdate(
-        { 'paymentInfo.razorpayOrderId': orderId },
-        { status: 'processing', 'paymentInfo.status': 'paid' }
-      );
-    }
-
+  if (!signature || !webhookSecret) {
+    logger.warn('Webhook: missing signature or secret — skipping');
     res.status(200).send('OK');
-  } catch (err) {
-    next(err);
+    return;
   }
+
+  const expectedSignature = crypto
+    .createHmac('sha256', webhookSecret)
+    .update(body)
+    .digest('hex');
+
+  if (expectedSignature !== signature) {
+    logger.warn('Webhook: invalid signature received');
+    res.status(200).send('OK'); // Always 200 so Razorpay doesn't retry infinitely
+    return;
+  }
+
+  try {
+    const event = JSON.parse(body.toString());
+    const eventType: string = event.event;
+    const payment = event.payload?.payment?.entity;
+
+    if (eventType === 'payment.captured' && payment) {
+      const order = await Order.findOne({
+        razorpayOrderId: payment.order_id,
+        paymentStatus: 'pending',
+      });
+      if (order) {
+        order.paymentStatus = 'paid';
+        order.razorpayPaymentId = payment.id;
+        order.fulfilmentStatus = 'placed';
+        await order.save();
+        logger.info(`Webhook: payment.captured → order ${order._id} marked paid`);
+      }
+    }
+
+    if (eventType === 'payment.failed' && payment) {
+      const order = await Order.findOne({
+        razorpayOrderId: payment.order_id,
+        paymentStatus: 'pending',
+      });
+      if (order) {
+        order.paymentStatus = 'failed';
+        await order.save();
+        logger.info(`Webhook: payment.failed → order ${order._id} marked failed`);
+      }
+    }
+  } catch (err) {
+    logger.error(`Webhook processing error: ${err}`);
+  }
+
+  res.status(200).send('OK');
 }

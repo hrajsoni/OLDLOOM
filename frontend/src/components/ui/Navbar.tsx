@@ -34,6 +34,7 @@ export function Navbar() {
     { label: 'Men',     href: '/collections/men'     },
     { label: 'Women',   href: '/collections/women'   },
     { label: 'Couples', href: '/collections/couples' },
+    { label: 'All',     href: '/collections/all'     },
     { label: 'About',   href: '/about'               },
   ];
 

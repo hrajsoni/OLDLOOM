@@ -44,11 +44,12 @@ export async function listProducts(req: Request, res: Response, next: NextFuncti
       ];
     }
 
-    let sortQuery: any = { createdAt: -1 };
-    if (sort === 'price_asc') sortQuery = { price: 1 };
-    if (sort === 'price_desc') sortQuery = { price: -1 };
+    let sortQuery: Record<string, number> = { createdAt: -1 };
+    if (sort === 'price_asc' || sort === 'price-asc') sortQuery = { price: 1 };
+    if (sort === 'price_desc' || sort === 'price-desc') sortQuery = { price: -1 };
     if (sort === 'popular') sortQuery = { totalSold: -1 };
     if (sort === 'newest') sortQuery = { createdAt: -1 };
+    if (sort === 'oldest') sortQuery = { createdAt: 1 };
 
     const pageNum = Number(page);
     const limitNum = Number(limit);

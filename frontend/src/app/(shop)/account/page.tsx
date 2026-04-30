@@ -1,13 +1,13 @@
-import { redirect } from 'next/navigation';
-import { auth } from '@/auth';
+import type { Metadata } from 'next';
 import { AccountClient } from '@/components/AccountClient';
 
-export default async function AccountPage() {
-  const session = await auth();
+export const metadata: Metadata = {
+  title: 'My Account | Old Loom',
+  description: 'Manage your Old Loom account — orders, wishlist, addresses, and profile.',
+};
 
-  if (!session?.user) {
-    redirect('/login');
-  }
-
-  return <AccountClient user={session.user} />;
+export default function AccountPage() {
+  // Auth guard is handled client-side in AccountClient via useSession
+  // to avoid server-side session mismatches in deployed environments
+  return <AccountClient user={null} />;
 }

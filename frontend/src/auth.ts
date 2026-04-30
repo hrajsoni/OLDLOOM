@@ -54,8 +54,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id!;
-        token.role = (user as any).role ?? 'customer';
-        token.accessToken = (user as any).accessToken;
+        token.role = user.role ?? 'customer';
+        token.accessToken = user.accessToken;
       }
       // Google OAuth — fetch role from backend
       if (account?.provider === 'google' && token.email) {
@@ -75,7 +75,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as any;
+        session.user.role = token.role;
         session.accessToken = token.accessToken as string | undefined;
       }
       return session;

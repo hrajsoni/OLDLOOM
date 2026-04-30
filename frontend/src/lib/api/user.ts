@@ -1,4 +1,5 @@
 import api from '../api';
+import type { Address } from '@/types';
 
 export const fetchWishlist = async () => {
   const { data } = await api.get('/wishlist');
@@ -30,12 +31,12 @@ export const fetchAddresses = async () => {
   return data.data;
 };
 
-export const addAddress = async (address: any) => {
+export const addAddress = async (address: Omit<Address, '_id'>) => {
   const { data } = await api.post('/user/addresses', address);
   return data.data;
 };
 
-export const updateAddress = async (id: string, address: any) => {
+export const updateAddress = async (id: string, address: Partial<Omit<Address, '_id'>>) => {
   const { data } = await api.put(`/user/addresses/${id}`, address);
   return data.data;
 };

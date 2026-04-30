@@ -57,11 +57,33 @@ export function CartDrawer() {
             Your Cart
           </h2>
           <button onClick={closeCart} style={{
-            background: 'none', border: 'none', color: 'var(--cream-50)', fontSize: '1.5rem', cursor: 'none'
+            background: 'none', border: 'none', color: 'var(--cream-50)', fontSize: '1.5rem', cursor: 'pointer', padding: '0.25rem 0.5rem'
           }}>
             ✕
           </button>
         </div>
+
+        {/* Free Shipping Progress */}
+        {(() => {
+          const FREE_THRESHOLD = 5000;
+          const totalVal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+          const remaining = Math.max(0, FREE_THRESHOLD - totalVal);
+          const pct = Math.min(100, (totalVal / FREE_THRESHOLD) * 100);
+          return (
+            <div style={{ padding: '0.75rem 2rem', background: 'rgba(201,168,76,0.05)', borderBottom: '1px solid rgba(201,168,76,0.08)' }}>
+              {remaining > 0 ? (
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--cream-50)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.4rem' }}>
+                  Add <span style={{ color: 'var(--gold)' }}>₹{remaining.toLocaleString('en-IN')}</span> more for free shipping
+                </p>
+              ) : (
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#34A853', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.4rem' }}>🎉 You qualify for free shipping!</p>
+              )}
+              <div style={{ height: '3px', background: 'rgba(201,168,76,0.15)', borderRadius: '2px', overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${pct}%`, background: 'var(--gold)', borderRadius: '2px', transition: 'width 0.4s ease' }} />
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Content */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -88,11 +110,11 @@ export function CartDrawer() {
                   </p>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-                  <button onClick={() => removeItem(item.sku)} style={{ background: 'none', border: 'none', color: 'var(--rust)', fontSize: '0.7rem', cursor: 'none' }}>Remove</button>
+                  <button onClick={() => removeItem(item.sku)} style={{ background: 'none', border: 'none', color: 'var(--rust)', fontSize: '0.7rem', cursor: 'pointer' }}>Remove</button>
                   <div style={{ display: 'flex', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '4px' }}>
-                    <button onClick={() => updateQty(item.sku, item.quantity - 1)} style={{ padding: '0.2rem 0.5rem', background: 'none', border: 'none', color: 'var(--cream)', cursor: 'none' }}>-</button>
+                    <button onClick={() => updateQty(item.sku, item.quantity - 1)} style={{ padding: '0.2rem 0.6rem', background: 'none', border: 'none', color: 'var(--cream)', cursor: 'pointer', fontSize: '1rem' }}>−</button>
                     <span style={{ padding: '0.2rem 0.5rem', color: 'var(--cream)', fontSize: '0.8rem', minWidth: '30px', textAlign: 'center' }}>{item.quantity}</span>
-                    <button onClick={() => updateQty(item.sku, item.quantity + 1)} style={{ padding: '0.2rem 0.5rem', background: 'none', border: 'none', color: 'var(--cream)', cursor: 'none' }}>+</button>
+                    <button onClick={() => updateQty(item.sku, item.quantity + 1)} style={{ padding: '0.2rem 0.6rem', background: 'none', border: 'none', color: 'var(--cream)', cursor: 'pointer', fontSize: '1rem' }}>+</button>
                   </div>
                 </div>
               </div>

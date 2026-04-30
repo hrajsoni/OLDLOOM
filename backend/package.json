@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
     "seed": "npx ts-node src/scripts/seed.ts"
   },
   "dependencies": {

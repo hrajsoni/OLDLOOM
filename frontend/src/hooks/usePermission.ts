@@ -43,14 +43,14 @@ const ROLE_PERMISSIONS: Record<UserRole, PermissionKey[]> = {
 
 export function usePermission(permission: PermissionKey): boolean {
   const { data: session } = useSession();
-  const role = (session?.user as any)?.role as UserRole | undefined;
+  const role = session?.user?.role;
   if (!role) return false;
   return ROLE_PERMISSIONS[role]?.includes(permission) ?? false;
 }
 
 export function useAdminRole(): UserRole | null {
   const { data: session } = useSession();
-  return ((session?.user as any)?.role as UserRole) ?? null;
+  return session?.user?.role ?? null;
 }
 
 export { Permission };

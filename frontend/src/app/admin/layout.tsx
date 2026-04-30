@@ -18,13 +18,13 @@ export default async function AdminLayout({
   const session = await auth();
 
   if (!session?.user) {
-    redirect('/login?callbackUrl=/admin');
+    redirect('/admin/login');
   }
 
-  const role = (session.user as any).role;
+  const role = session.user.role;
   if (!ADMIN_ROLES.includes(role)) {
     redirect('/?error=unauthorized');
   }
 
-  return <AdminShell user={session.user as any}>{children}</AdminShell>;
+  return <AdminShell user={session.user}>{children}</AdminShell>;
 }

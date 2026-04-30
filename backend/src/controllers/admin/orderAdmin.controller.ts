@@ -61,21 +61,43 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response): Promis
       return;
     }
 
-    const order = await Order.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          fulfilmentStatus,
-          ...(trackingNumber && { trackingNumber }),
-        },
-      },
-      { new: true }
-    );
-
+    // Fetch first to validate state transition
+    const order = await Order.findById(req.params.id).populate('user', 'name email');
     if (!order) {
       res.status(404).json({ status: 'error', message: 'Order not found' });
       return;
     }
+
+    // Enforce valid state transitions
+    const transitions: Record<string, string[]> = {
+      placed: ['processing', 'cancelled'],
+      processing: ['shipped', 'cancelled'],
+      shipped: ['delivered', 'returned'],
+      delivered: ['returned'],
+      cancelled: [],
+      returned: [],
+    };
+
+    if (!transitions[order.fulfilmentStatus]?.includes(fulfilmentStatus)) {
+      res.status(400).json({
+        status: 'error',
+        message: `Cannot transition from '${order.fulfilmentStatus}' to '${fulfilmentStatus}'`,
+      });
+      return;
+    }
+
+    // Require tracking number when shipping
+    if (fulfilmentStatus === 'shipped' && !trackingNumber && !order.trackingNumber) {
+      res.status(400).json({
+        status: 'error',
+        message: 'Tracking number required when marking as shipped',
+      });
+      return;
+    }
+
+    order.fulfilmentStatus = fulfilmentStatus;
+    if (trackingNumber) order.trackingNumber = trackingNumber;
+    await order.save();
 
     res.json({ status: 'ok', data: order });
   } catch {

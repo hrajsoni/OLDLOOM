@@ -11,7 +11,22 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com', // Google OAuth avatars
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
         pathname: '/**',
       },
     ],
@@ -41,7 +56,7 @@ const nextConfig = {
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://checkout.razorpay.com https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com",
+              "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://picsum.photos https://fastly.picsum.photos https://placehold.co https://images.unsplash.com",
               "connect-src 'self' https://api.razorpay.com http://localhost:5000 https://*.onrender.com",
               "frame-src https://api.razorpay.com",
               "object-src 'none'",
