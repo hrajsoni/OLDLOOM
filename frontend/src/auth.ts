@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
+import type { UserRole } from '@/types';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -75,7 +76,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role;
+        session.user.role = token.role as UserRole;
         session.accessToken = token.accessToken as string | undefined;
       }
       return session;
