@@ -1,10 +1,6 @@
 # 🧵 Old Loom — Premium Embroidery E-Commerce
 
 > A production-grade e-commerce platform for a premium Indian hand-embroidered clothing brand. Features immersive 3D product visualization, role-based admin panel, integrated payments, and serverless deployment.
-
-🌐 **Live Demo**: [oldloom.in](https://oldloom.in) *(replace with your URL)*  
-📸 **Screenshots**: See `/docs/screenshots`
-
 ---
 
 ## ✨ Features
