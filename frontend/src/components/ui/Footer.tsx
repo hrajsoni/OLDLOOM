@@ -54,8 +54,33 @@ export function Footer() {
       </div>
 
       <div style={{ maxWidth: '1200px', margin: '5rem auto 0 auto', borderTop: '1px solid rgba(245,240,232,0.05)', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-        <p style={{ fontSize: '0.75rem', color: 'var(--cream)', fontFamily: 'var(--font-mono)' }}>
-          © 2025 Old Loom · Crafted with love in India by <span style={{ color: 'var(--gold)', fontWeight: 'bold' }}>Harshit Raj</span> 🇮🇳
+        <p style={{ 
+          fontSize: '0.65rem', 
+          color: 'var(--cream-50)', 
+          fontFamily: 'var(--font-body)', 
+          letterSpacing: '0.12em', 
+          textTransform: 'uppercase',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+          flexWrap: 'wrap'
+        }}>
+          <span>© 2025 Old Loom</span>
+          <span style={{ color: 'rgba(245,240,232,0.15)' }}>|</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+            Handcrafted with love by{' '}
+            <span style={{ color: 'var(--gold)', fontWeight: 600, letterSpacing: '0.18em' }}>
+              Harshit Raj
+            </span>
+          </span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', marginLeft: '0.1rem' }}>
+            <svg width="14" height="10" viewBox="0 0 3 2" style={{ borderRadius: '1px', boxShadow: '0 1px 3px rgba(0,0,0,0.3)' }} aria-label="India Flag">
+              <rect width="3" height="2" fill="#FF9933" />
+              <rect y="0.666" width="3" height="1.333" fill="#FFFFFF" />
+              <rect y="1.333" width="3" height="0.667" fill="#138808" />
+              <circle cx="1.5" cy="1" r="0.16" fill="#000080" />
+            </svg>
+          </span>
         </p>
         <div style={{ display: 'flex', gap: '2rem' }}>
           <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Privacy Policy</Link>
