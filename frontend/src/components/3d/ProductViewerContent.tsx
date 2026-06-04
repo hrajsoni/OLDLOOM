@@ -64,7 +64,7 @@ export function ProductViewerContent({ colorHex, materialRef }: ProductViewerCon
       <directionalLight position={[-5, 3, -5]} intensity={0.3} color="#C9A84C" />
       <pointLight position={[0, -3, 3]} intensity={0.5} color="#F5F0E8" />
 
-      <Environment preset="city" />
+      <Environment files="/potsdamer_platz_1k.hdr" />
 
       <ProductMesh colorHex={colorHex} materialRef={materialRef} />
 
