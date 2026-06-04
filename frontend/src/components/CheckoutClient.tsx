@@ -354,8 +354,8 @@ export function CheckoutClient() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem', maxHeight: '40vh', overflowY: 'auto' }}>
               {items.map(item => (
                 <div key={item.sku} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                  <div style={{ width: '60px', height: '80px', position: 'relative', borderRadius: '4px', overflow: 'hidden' }}>
-                    <Image src={item.image} alt={item.name} fill style={{ objectFit: 'cover' }} />
+                  <div style={{ width: '60px', height: '80px', position: 'relative', borderRadius: '4px', overflow: 'hidden', background: 'var(--cream)' }}>
+                    <Image src={item.image} alt={item.name} fill style={{ objectFit: 'cover', mixBlendMode: 'multiply' }} />
                   </div>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--cream)' }}>{item.name}</p>

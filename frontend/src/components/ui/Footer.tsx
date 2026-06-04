@@ -5,11 +5,11 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer 
+      className="pb-[calc(60px+env(safe-area-inset-bottom)+1.5rem)] lg:pb-16"
       style={{ 
         background: '#0F0D0B', 
         color: 'var(--cream)', 
         paddingTop: '6rem', 
-        paddingBottom: '8rem', 
         paddingLeft: 'var(--section-px)', 
         paddingRight: 'var(--section-px)', 
         borderTop: '1px solid rgba(201,168,76,0.1)' 

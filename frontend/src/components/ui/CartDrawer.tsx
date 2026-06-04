@@ -97,8 +97,8 @@ export function CartDrawer() {
           ) : (
             items.map((item) => (
               <div key={item.sku} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ width: '80px', height: '100px', position: 'relative', borderRadius: 'var(--radius-sm)', overflow: 'hidden', background: 'rgba(201,168,76,0.05)' }}>
-                  <Image src={item.image || '/placeholder.jpg'} alt={item.name} fill style={{ objectFit: 'cover' }} />
+                <div style={{ width: '80px', height: '100px', position: 'relative', borderRadius: 'var(--radius-sm)', overflow: 'hidden', background: 'var(--cream)' }}>
+                  <Image src={item.image || '/placeholder.jpg'} alt={item.name} fill style={{ objectFit: 'cover', mixBlendMode: 'multiply' }} />
                 </div>
                 <div style={{ flex: 1 }}>
                   <h3 style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--cream)' }}>{item.name}</h3>

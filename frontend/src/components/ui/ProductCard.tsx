@@ -109,7 +109,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/products/${product.slug}`} style={{ display: 'block', position: 'relative' }}>
         <div
           ref={imgWrapRef}
-          style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', background: '#2a1f17' }}
+          style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden', background: 'var(--cream)' }}
         >
           {/* Primary image */}
           <Image
@@ -117,7 +117,7 @@ export function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            style={{ objectFit: 'cover', transition: 'transform 0.6s ease' }}
+            style={{ objectFit: 'cover', transition: 'transform 0.6s ease', mixBlendMode: 'multiply' }}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAFCAYAAABirU3bAAAAFklEQVQI12NgYGD4z8BQDwAEgAF/QualIQAAAABJRU5ErkJggg=="
           />
@@ -132,7 +132,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 alt={`${product.name} alternate`}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', mixBlendMode: 'multiply' }}
               />
             )}
           </div>

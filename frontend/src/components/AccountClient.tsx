@@ -197,8 +197,8 @@ export function AccountClient({ user: _initial }: { user: any }) {
                   <OrderTimeline status={order.fulfilmentStatus} updatedAt={order.updatedAt} />
                   <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', overflowX: 'auto', paddingBottom: '0.25rem' }}>
                     {order.items?.map((item: any) => (
-                      <div key={item.sku} style={{ width: '56px', height: '72px', position: 'relative', borderRadius: '4px', overflow: 'hidden', flexShrink: 0, background: 'rgba(201,168,76,0.05)' }}>
-                        <Image src={item.image || '/placeholder.jpg'} alt={item.name} fill style={{ objectFit: 'cover' }} />
+                      <div key={item.sku} style={{ width: '56px', height: '72px', position: 'relative', borderRadius: '4px', overflow: 'hidden', flexShrink: 0, background: 'var(--cream)' }}>
+                        <Image src={item.image || '/placeholder.jpg'} alt={item.name} fill style={{ objectFit: 'cover', mixBlendMode: 'multiply' }} />
                       </div>
                     ))}
                   </div>
@@ -219,8 +219,8 @@ export function AccountClient({ user: _initial }: { user: any }) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1.5rem' }}>
                 {wishlist.map((product: any) => (
                   <div key={product._id} style={{ position: 'relative', background: 'rgba(61,43,31,0.3)', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(201,168,76,0.1)' }}>
-                    <div style={{ aspectRatio: '3/4', position: 'relative' }}>
-                      <Image src={product.images?.[0] || '/placeholder.jpg'} alt={product.name} fill style={{ objectFit: 'cover' }} />
+                    <div style={{ aspectRatio: '3/4', position: 'relative', background: 'var(--cream)' }}>
+                      <Image src={product.images?.[0] || '/placeholder.jpg'} alt={product.name} fill style={{ objectFit: 'cover', mixBlendMode: 'multiply' }} />
                     </div>
                     <div style={{ padding: '0.75rem' }}>
                       <p style={{ fontFamily: 'var(--font-display)', color: 'var(--cream)', fontSize: '0.9rem' }}>{product.name}</p>

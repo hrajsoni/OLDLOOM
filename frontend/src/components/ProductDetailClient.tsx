@@ -397,12 +397,12 @@ export function ProductDetailClient({ product, related }: ProductDetailClientPro
       >
         {/* Image */}
         {product.images[0] && (
-          <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '1', position: 'relative' }}>
+          <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', aspectRatio: '1', position: 'relative', background: 'var(--cream)' }}>
             <Image
               src={product.images[0]}
               alt={`${product.name} embroidery detail`}
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', mixBlendMode: 'multiply' }}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
