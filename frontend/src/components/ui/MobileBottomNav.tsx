@@ -16,7 +16,7 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <div className="lg:hidden" style={{
+    <div className="flex lg:hidden justify-around items-center" style={{
       position: 'fixed',
       bottom: 0,
       left: 0,
@@ -24,9 +24,6 @@ export function MobileBottomNav() {
       background: 'rgba(26,22,18,0.98)',
       backdropFilter: 'blur(10px)',
       borderTop: '1px solid rgba(201,168,76,0.15)',
-      display: 'flex',
-      justifyContent: 'space-around',
-      alignItems: 'center',
       height: '60px',
       zIndex: 1000,
       paddingBottom: 'env(safe-area-inset-bottom)',
