@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
-    "seed": "npx ts-node src/scripts/seed.ts"
+    "seed": "npx ts-node src/scripts/seed.ts",
+    "import-zara": "npx ts-node src/scripts/import-zara.ts"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.10",
