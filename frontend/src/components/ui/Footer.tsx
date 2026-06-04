@@ -4,7 +4,17 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer style={{ background: '#0F0D0B', color: 'var(--cream)', padding: '6rem var(--section-px) 3rem var(--section-px)', borderTop: '1px solid rgba(201,168,76,0.1)' }}>
+    <footer 
+      className="pb-32 lg:pb-12"
+      style={{ 
+        background: '#0F0D0B', 
+        color: 'var(--cream)', 
+        paddingTop: '6rem', 
+        paddingLeft: 'var(--section-px)', 
+        paddingRight: 'var(--section-px)', 
+        borderTop: '1px solid rgba(201,168,76,0.1)' 
+      }}
+    >
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '4rem' }}>
         {/* Brand */}
         <div>
