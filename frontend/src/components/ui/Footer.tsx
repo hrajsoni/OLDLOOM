@@ -55,7 +55,7 @@ export function Footer() {
 
       <div style={{ maxWidth: '1200px', margin: '5rem auto 0 auto', borderTop: '1px solid rgba(245,240,232,0.05)', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
         <p style={{ fontSize: '0.7rem', color: 'var(--cream-50)', fontFamily: 'var(--font-mono)' }}>
-          © 2025 Old Loom · Handcrafted in India
+          © 2025 Old Loom · Crafted with love in India by Harshit Raj 🇮🇳
         </p>
         <div style={{ display: 'flex', gap: '2rem' }}>
           <Link href="/privacy" style={{ fontSize: '0.7rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Privacy Policy</Link>
