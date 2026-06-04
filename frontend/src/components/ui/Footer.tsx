@@ -5,11 +5,11 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer 
-      className="pb-32 lg:pb-12"
       style={{ 
         background: '#0F0D0B', 
         color: 'var(--cream)', 
         paddingTop: '6rem', 
+        paddingBottom: '8rem', 
         paddingLeft: 'var(--section-px)', 
         paddingRight: 'var(--section-px)', 
         borderTop: '1px solid rgba(201,168,76,0.1)' 
@@ -54,13 +54,13 @@ export function Footer() {
       </div>
 
       <div style={{ maxWidth: '1200px', margin: '5rem auto 0 auto', borderTop: '1px solid rgba(245,240,232,0.05)', paddingTop: '2rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-        <p style={{ fontSize: '0.7rem', color: 'var(--cream-50)', fontFamily: 'var(--font-mono)' }}>
-          © 2025 Old Loom · Crafted with love in India by Harshit Raj 🇮🇳
+        <p style={{ fontSize: '0.75rem', color: 'var(--cream)', fontFamily: 'var(--font-mono)' }}>
+          © 2025 Old Loom · Crafted with love in India by <span style={{ color: 'var(--gold)', fontWeight: 'bold' }}>Harshit Raj</span> 🇮🇳
         </p>
         <div style={{ display: 'flex', gap: '2rem' }}>
-          <Link href="/privacy" style={{ fontSize: '0.7rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Privacy Policy</Link>
-          <Link href="/terms" style={{ fontSize: '0.7rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Terms of Service</Link>
-          <Link href="/refund" style={{ fontSize: '0.7rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Refund Policy</Link>
+          <Link href="/privacy" style={{ fontSize: '0.75rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ fontSize: '0.75rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Terms of Service</Link>
+          <Link href="/refund" style={{ fontSize: '0.75rem', color: 'var(--cream-50)', textDecoration: 'none' }}>Refund Policy</Link>
         </div>
       </div>
     </footer>
